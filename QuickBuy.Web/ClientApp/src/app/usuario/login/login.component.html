@@ -6,11 +6,11 @@
            name="email" placeholder="Informe seu Email"
            #email="ngModel"
            class="form-control mb-2"
-           [ngClass] ="{
+           [ngClass]="{
             'is-invalid':email.invalid && (email.dirty || email.touched),
             'is-valid':email.valid && (email.dirty || email.touched)
            }"
-           [(ngModel)]="usuario.email"           
+           [(ngModel)]="usuario.email"
            email
            required />
     <div class="invalid-feedback mb-2" *ngIf="email.invalid && (email.dirty || email.touched)">
@@ -26,12 +26,12 @@
     <input type="password" id="inputSenha"
            name="senha" placeholder="Senha"
            class="form-control mb-2"
-            #senha="ngModel" 
-           [ngClass] ="{
+           #senha="ngModel"
+           [ngClass]="{
             'is-invalid':senha.invalid && (senha.dirty || senha.touched),
             'is-valid':senha.valid && (senha.dirty || senha.touched)
            }"
-           [(ngModel)]="usuario.senha"                    
+           [(ngModel)]="usuario.senha"
            required />
     <div class="invalid-feedback mb-2" *ngIf="senha.invalid && (senha.dirty || senha.touched)">
       <div *ngIf="senha.errors.required">
@@ -39,10 +39,16 @@
       </div>
     </div>
 
-    <button class="btn btn-primary btn-block" type="submit" (click)="entrar()">Entrar</button>
+    <button class="btn btn-primary btn-block" type="submit" (click)="entrar()" [disabled]="ativar_spinner">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativar_spinner"></span>
+      Entrar
+    </button>
+
+    <div class="alert alert-danger" *ngIf="mensagem">
+      {{mensagem}}
+    </div>
+
     <img src="../../../assets\Img\quick-logo.jpg" />
-
-
 
   </form>
 </div>
