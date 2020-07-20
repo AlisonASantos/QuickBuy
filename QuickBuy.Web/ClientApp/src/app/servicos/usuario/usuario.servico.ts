@@ -37,15 +37,29 @@ export class UsuarioServico {
     this.baseUrl = baseUrl;
   }
 
-  public verificarUsuario(usuatio: Usuario): Observable<Usuario> {
+  public verificarUsuario(usuario: Usuario): Observable<Usuario> {
 
     const headers = new HttpHeaders().set('content-type', 'application/json');
 
     var body = {
-      email: usuatio.email,
-      senha: usuatio.senha
+      email: usuario.email,
+      senha: usuario.senha
     }
 
     return this.http.post<Usuario>(this.baseUrl + "api/usuario/verificarUsuario", body, { headers });
+  }
+
+  public cadastrarUsuario(usuario: Usuario): Observable<Usuario> {
+
+    const headers = new HttpHeaders().set('content-type', 'application/json');
+
+    var body = {
+      email: usuario.email,
+      senha: usuario.senha,
+      nome: usuario.nome,
+      sobreNome: usuario.sobrenome
+    }
+
+    return this.http.post<Usuario>(this.baseUrl + "api/usuario", body, { headers });
   }
 }
