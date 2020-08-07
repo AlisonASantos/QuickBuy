@@ -5,7 +5,10 @@
        name="nomeProduto" placeholder="Nome do Produto"
        #nome="ngModel"
        class="form-control mb-2 col-md-4"
-       [ngClass]=""
+       [ngClass]="{
+          'is-invalid':nome.invalid && (nome.dirty || nome.touched),
+          'is-valid':nome.valid && (nome.dirty || nome.touched)
+        }"
        [(ngModel)]="produto.nome"
        nome
        required />
@@ -20,7 +23,10 @@
        name="descricaoProduto" placeholder="Descrição do Produto"
        #descricao="ngModel"
        class="form-control mb-2 col-md-4"
-       [ngClass]=""
+       [ngClass]="{
+          'is-invalid':descricao.invalid && (descricao.dirty || descricao.touched),
+          'is-valid':descricao.valid && (descricao.dirty || descricao.touched)
+       }"
        [(ngModel)]="produto.descricao"
        descricao
        required />
@@ -35,7 +41,10 @@
        name="precoProduto" placeholder="Preço do Produto"
        #preco="ngModel"
        class="form-control mb-2 col-md-2"
-       [ngClass]=""
+       [ngClass]="{
+          'is-invalid':preco.invalid && (preco.dirty || preco.touched),
+          'is-valid':preco.valid && (preco.dirty || preco.touched)
+       }"
        [(ngModel)]="produto.preco"
        preco
        required />
@@ -48,10 +57,21 @@
 <div class="input-group mb-2">
   <div class="custom-file col-md-4">
 
-    <input type="file" id="inputFile" class="custom-file-input">
+    <input type="file" id="inputFile" class="custom-file-input" (change)="inputChange($event.target.files)"/>
     <label for="inputFile" class="custom-file-label">Escolha uma foto</label>
 
   </div>
 </div>
 
-<button class="btn btn-primary" (click)="cadastrar()">Cadastrar</button>
+<div class="form-inline">
+  <button class="btn btn-primary mb-2" style="margin-right:4px;" (click)="cadastrar()" [disabled]="ativar_spinner">
+    <span class="spinner-border spinner-border-sm" *ngIf="ativar_spinner"></span>
+    Cadastrar
+  </button>
+  <button class="btn btn-secondary" style="margin-right:4px;" [routerLink]="['/pesquisar-produto']">
+    Cancelar
+  </button>
+</div>
+<div class="alert alert-danger col-md-4" *ngIf="mensagem">
+  {{mensagem}}
+</div>

@@ -90,6 +90,9 @@
     <div class="alert alert-danger" *ngIf="mensagem">
       {{mensagem}}
     </div>
+    <div class="alert alert-success" *ngIf="usuarioCadastrado">
+      Usuario Cadastrado com sucesso!<a class="alert-link" [routerLink]='["/entrar"]'>Clique aqui</a> Para entrar no sistema com a sua conta
+    </div>
 
     <img src="../../../assets\Img\quick-logo.jpg" />
 

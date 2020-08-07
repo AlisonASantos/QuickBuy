@@ -34,16 +34,22 @@ export class ProdutoServico implements OnInit {
     return this.http.post<Produto>(this._baseUrl + "api/produto/cadastrar", JSON.stringify(produto), { headers: this.headers })
   }
 
-  public delete(produto: Produto): Observable<Produto> {
+  public delete(produto: Produto): Observable<Produto[]> {
 
-    return this.http.post<Produto>(this._baseUrl + "api/produto/delete", JSON.stringify(produto), { headers: this.headers })
+    return this.http.post<Produto[]>(this._baseUrl + "api/produto/delete", JSON.stringify(produto), { headers: this.headers })
   }
 
-  public obterTodosProdutos(produtoId: number): Observable<Produto[]> {
+  public obterTodosProdutos(): Observable<Produto[]> {
     return this.http.get<Produto[]>(this._baseUrl + "api/produto")
   }
 
   public obterProduto(produtoId: number): Observable<Produto[]>{
     return this.http.get<Produto[]>(this._baseUrl + "api/produto")
+  }
+
+  enviarArquivo(arquivoSelecionado: File): Observable<string> {
+    const formData: FormData = new FormData();
+    formData.append("arquivoEnviado", arquivoSelecionado, arquivoSelecionado.name);
+    return this.http.post<string>(this._baseUrl + "api/produto/enviarArquivo", formData);
   }
 }
